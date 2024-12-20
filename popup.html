@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flipkart Meet Summariser</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      --fk-blue: #2874f0;
+      --fk-yellow: #ffe11b;
+      --text-primary: #212121;
+      --text-secondary: #878787;
+      --border-color: #f0f0f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 400px;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      background-image: url('https://source.unsplash.com/random/800x600?abstract');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .container {
+      padding: 1.5rem;
+      background-color: #ffffff;
+      box-shadow: none;
+      margin: 0;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+    }
+
+    .header-text h1 {
+      font-size: 1.25rem;
+      color: var(--fk-blue);
+      margin-bottom: 0.25rem;
+    }
+
+    .header-text p {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .mode-selector {
+      margin-bottom: 1.5rem;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .radio-option {
+      flex: 1;
+      position: relative;
+    }
+
+    .radio-option input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .radio-option label {
+      display: block;
+      padding: 0.75rem;
+      background: #f8f9fa;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .radio-option input:checked + label {
+      background: #fff;
+      border-color: var(--fk-blue);
+      color: var(--fk-blue);
+    }
+
+    .info-box {
+      background: #f1f3f6;
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .info-box h2 {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
+    }
+
+    .info-box p {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.75rem;
+    }
+
+    .info-box ul {
+      padding-left: 1.25rem;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .info-box li {
+      margin-bottom: 0.5rem;
+    }
+
+    .download-button {
+      display: inline-block;
+      background: var(--fk-blue);
+      color: white;
+      padding: 0.75rem 1.25rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: background-color 0.2s ease;
+    }
+
+    .download-button:hover {
+      background: #1c5ad4;
+    }
+
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+    .api-key-section {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    background: #f1f3f6;
+    border-radius: 8px;
+}
+
+.api-key-section h2 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.api-key-input {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.api-key-input input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.875rem;
+}
+
+.save-button {
+    background: var(--fk-blue);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.save-button:hover {
+    background: #1c5ad4;
+}
+
+.api-key-status {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="./icon.png" alt="ChatGPT Meet Summariser" />
+      <div class="header-text">
+        <h1>ChatGPT G-Meet Summariser</h1>
+        <p>Never miss important meeting details</p>
+      </div>
+    </div>
+
+    <div class="api-key-section">
+      <h2>OpenAI API Key</h2>
+      <div class="api-key-input">
+          <input type="password" id="api-key-input" placeholder="Enter your OpenAI API key" />
+          <button id="save-api-key" class="save-button">Save Key</button>
+      </div>
+      <p class="api-key-status" id="api-key-status"></p>
+     </div>
+  
+
+    <div class="mode-selector">
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="mode" id="auto-mode" />
+          <label for="auto-mode">
+            <strong>Auto Mode</strong>
+          </label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="mode" id="manual-mode" />
+          <label for="manual-mode">
+            <strong>Manual Mode</strong>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <h2>How to use Meet Summariser?</h2>
+      <p>Transcript will be automatically saved at the end of each meeting. <strong>Please keep the meeting tab open.</strong></p>
+      <ul>
+        <li><strong>Auto Mode:</strong> Records all meeting transcripts automatically</li>
+        <li><strong>Manual Mode:</strong> Enable transcription using the CC (captions) icon in Meet</li>
+      </ul>
+    </div>
+
+    <a href="#" id="last-meeting-transcript" class="download-button">
+      Download Last Meeting Transcript
+    </a>
+
+    <div class="footer">
+      Powered by Flipkart AI
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
+
