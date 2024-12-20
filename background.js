@@ -94,16 +94,16 @@ async function downloadTranscript() {
             })
 
             // Get the summary from OpenAI
-            const transcriptText = result.transcript.map(entry => 
+            const transcriptText = result.transcript.map(entry =>
                 `${entry.personName}: ${entry.personTranscript}`
             ).join('\n');
-            
+
             const summary = await getSummary(transcriptText);
-            
+
             if (summary) {
-                lines.push("------------------------------------------------------------")
+                lines.push("--------------------------------------------------------------------------------------------------------------------------------------------")
                 lines.push("MEETING SUMMARY GENERATED WITH CHATGPT")
-                lines.push("------------------------------------------------------------")
+                lines.push("--------------------------------------------------------------------------------------------------------------------------------------------")
                 lines.push(summary)
                 lines.push("")
                 lines.push("")
@@ -114,9 +114,9 @@ async function downloadTranscript() {
 
             if (result.chatMessages.length > 0) {
                 // Iterate through the chat messages array and format each entry
-                lines.push("------------------------------------------------------------")
+                lines.push("--------------------------------------------------------------------------------------------------------------------------------------------")
                 lines.push("CHAT MESSAGES")
-                lines.push("------------------------------------------------------------")
+                lines.push("--------------------------------------------------------------------------------------------------------------------------------------------")
                 result.chatMessages.forEach(entry => {
                     lines.push(`${entry.personName} (${entry.timeStamp})`)
                     lines.push(entry.chatMessageText)
@@ -128,9 +128,9 @@ async function downloadTranscript() {
             }
 
             // Add branding
-            lines.push("------------------------------------------------------------")
+            lines.push("--------------------------------------------------------------------------------------------------------------------------------------------")
             lines.push("Transcript saved using Google Meet AI Summariser extension created by https://www.princejain.me")
-            lines.push("------------------------------------------------------------")
+            lines.push("--------------------------------------------------------------------------------------------------------------------------------------------")
 
             // Join the lines into a single string, replace "You" with userName from storage
             const textContent = lines.join("\n").replace(/You \(/g, result.userName + " (")

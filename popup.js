@@ -15,28 +15,28 @@ window.onload = function () {
     else if (result.operationMode == "manual")
       manualModeRadio.checked = true
   })
-  chrome.storage.local.get(['openaiApiKey'], function(result) {
+  chrome.storage.local.get(['openaiApiKey'], function (result) {
     if (result.openaiApiKey) {
-        apiKeyStatus.textContent = 'API key is set';
-        apiKeyInput.placeholder = '••••••••••••••••';
+      apiKeyStatus.textContent = 'API key is set';
+      apiKeyInput.placeholder = '••••••••••••••••';
     } else {
-        apiKeyStatus.textContent = 'No API key saved';
+      apiKeyStatus.textContent = 'No API key saved';
     }
-});
+  });
 
-// Save API key
-saveKeyButton.addEventListener('click', function() {
+  // Save API key
+  saveKeyButton.addEventListener('click', function () {
     const apiKey = apiKeyInput.value.trim();
     if (apiKey) {
-        chrome.storage.local.set({ openaiApiKey: apiKey }, function() {
-            apiKeyStatus.textContent = 'API key saved successfully';
-            apiKeyInput.value = '';
-            apiKeyInput.placeholder = '••••••••••••••••';
-        });
+      chrome.storage.local.set({ openaiApiKey: apiKey }, function () {
+        apiKeyStatus.textContent = 'API key saved successfully';
+        apiKeyInput.value = '';
+        apiKeyInput.placeholder = '••••••••••••••••';
+      });
     } else {
-        apiKeyStatus.textContent = 'Please enter a valid API key';
+      apiKeyStatus.textContent = 'Please enter a valid API key';
     }
-});
+  });
   autoModeRadio.addEventListener("change", function () {
     chrome.storage.sync.set({ operationMode: "auto" }, function () { })
   })

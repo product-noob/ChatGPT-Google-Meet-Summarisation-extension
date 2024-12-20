@@ -1,6 +1,6 @@
 {
   "name": "ChatGPT Google Meet Summariser",
-  "version": "2.2",
+  "version": "1.1",
   "manifest_version": 3,
   "description": "Summarise Google Meets with ChatGPT and never miss anything!",
   "action": {

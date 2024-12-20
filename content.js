@@ -49,18 +49,18 @@ function autoSendMessage() {
     if (targetDiv) {
       const textBox = targetDiv.querySelector('textarea');
       const sendButton = targetDiv.querySelector('button');
-      
+
       if (textBox && sendButton) {
         textBox.value = "Please Note: Meeting Transcripts are auto-recorded by Chrome extension for Summarisation";
         sendButton.disabled = false;
         sendButton.click();
-        
+
         const data = {
           textBoxValue: textBox.value,
           isSendButtonDisabled: sendButton.disabled,
           sendButtonClicked: true
         };
-        
+
         console.log('Auto message sent:', data);
       }
     }
@@ -75,7 +75,7 @@ async function checkExtensionStatus() {
     // Default status indicating the extension is running
     const defaultStatus = {
       status: 200,
-      message: "<strong>FK GPT Meeting Summariser is running</strong> <br /> Captions are ON"
+      message: "<strong>ChatGPT Meeting Summariser is running</strong> <br /> Captions are ON"
     };
 
     // Save default status directly to chrome storage
