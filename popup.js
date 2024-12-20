@@ -15,28 +15,6 @@ window.onload = function () {
     else if (result.operationMode == "manual")
       manualModeRadio.checked = true
   })
-  chrome.storage.local.get(['openaiApiKey'], function (result) {
-    if (result.openaiApiKey) {
-      apiKeyStatus.textContent = 'API key is set';
-      apiKeyInput.placeholder = '••••••••••••••••';
-    } else {
-      apiKeyStatus.textContent = 'No API key saved';
-    }
-  });
-
-  // Save API key
-  saveKeyButton.addEventListener('click', function () {
-    const apiKey = apiKeyInput.value.trim();
-    if (apiKey) {
-      chrome.storage.local.set({ openaiApiKey: apiKey }, function () {
-        apiKeyStatus.textContent = 'API key saved successfully';
-        apiKeyInput.value = '';
-        apiKeyInput.placeholder = '••••••••••••••••';
-      });
-    } else {
-      apiKeyStatus.textContent = 'Please enter a valid API key';
-    }
-  });
   autoModeRadio.addEventListener("change", function () {
     chrome.storage.sync.set({ operationMode: "auto" }, function () { })
   })
@@ -53,4 +31,27 @@ window.onload = function () {
         alert("Couldn't find the last meeting's transcript. May be attend one?")
     })
   })
+  
+  chrome.storage.local.get(['openaiApiKey'], function (result) {
+    if (result.openaiApiKey) {
+      apiKeyStatus.textContent = 'API key is set';
+      apiKeyInput.placeholder = '••••••••••••••••';
+    } else {
+      apiKeyStatus.textContent = 'No API key saved';
+    }
+  });
+
+  saveKeyButton.addEventListener('click', function () {
+    const apiKey = apiKeyInput.value.trim();
+    if (apiKey) {
+      chrome.storage.local.set({ openaiApiKey: apiKey }, function () {
+        apiKeyStatus.textContent = 'API key saved successfully';
+        apiKeyInput.value = '';
+        apiKeyInput.placeholder = '••••••••••••••••';
+      });
+    } else {
+      apiKeyStatus.textContent = 'Please enter a valid API key';
+    }
+  });
+
 }
